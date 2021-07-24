@@ -20,7 +20,7 @@ body {
 
     &:hover {
 
-        transition: 2.5s linear;
+        transition: 2.5s ease-in-out;
         background: rgb(27, 27, 27);
         background: radial-gradient(circle, rgb(15, 15, 15) 51%, rrgb(146, 42, 46)100%);
 

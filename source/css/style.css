@@ -13,7 +13,7 @@ body {
 }
 html:hover,
 body:hover {
-  transition: 2.5s linear;
+  transition: 2.5s ease-in-out;
   background: #1b1b1b;
   background: radial-gradient(circle, #0f0f0f 51%, rrgb(146, 42, 46) 100%);
 }
