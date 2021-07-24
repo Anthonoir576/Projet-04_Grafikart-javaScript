@@ -40,7 +40,7 @@ main {
 
     width: 60%;
     max-width: 900px;
-    margin: 1rem auto;
+    margin: 0px auto;
 
     border: 2px solid rgba(0, 0, 0, 0.89);
     border-radius: 9px;
@@ -98,5 +98,19 @@ main {
         }
 
     }
+
+}
+
+// #########  JS  #################
+
+.carousel {
+
+    position: relative;
+
+}
+
+.carousel__item {
+
+    float: left;
 
 }
