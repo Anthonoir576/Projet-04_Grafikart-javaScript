@@ -30,6 +30,7 @@ class Carousel {
         this.root = this.createDivWithClass('carousel');
 
         this.container = this.createDivWithClass('carousel__container');
+        this.root.setAttribute('tabindex', '0');
         
         this.root.appendChild(this.container);
         this.element.appendChild(this.root);
@@ -51,6 +52,23 @@ class Carousel {
         this.moveCallBacks.forEach(cb => cb(0));
 
         this.onWindowResize();
+
+        // Accessibilité
+        this.root.addEventListener('keyup', (e) => {
+
+            if (e.key === 'ArrowRight' || e.key === 'Right') {
+
+                this.next();
+
+            } else if (e.key === 'ArrowLeft' || e.key === 'Left') {
+
+                this.prev();
+
+            };
+
+        });
+
+
 
         window.addEventListener('resize', this.onWindowResize.bind(this));
 
@@ -226,24 +244,22 @@ document.addEventListener('DOMContentLoaded', () => {
         slidesToScroll: 1,
         loop : false
 
-    })
+    });
 
 
     new Carousel(document.querySelector('#carousel2'), {
 
         slidesVisible: 2,
         slidesToScroll: 2,
-        loop : false
 
-    })
+    });
 
     
     new Carousel(document.querySelector('#carousel3'), {
 
         slidesVisible: 3,
         slidesToScroll: 3,
-        loop : false
 
-    })
+    });
 
 });
