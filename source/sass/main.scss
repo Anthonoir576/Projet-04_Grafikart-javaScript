@@ -140,7 +140,7 @@ main {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    opacity: .9;
+    opacity: 1;
     cursor: pointer;
     transition: .3s;
     animation: opacity .3s;
@@ -149,7 +149,7 @@ main {
 
         transition: .5s;
         transform: scale(1.1);
-        opacity: 1;
+        
 
     }
 
@@ -175,15 +175,8 @@ main {
 
 .carousel__prev--hidden, .carousel__next--hidden {
 
-    opacity: 0.2;
-    cursor: auto;
+    opacity: 0.1;
+   
 
-    &:hover {
-
-        transition: .5s;
-        transform: none;
-        opacity: .2;
-
-    }
 
 }

@@ -102,8 +102,10 @@ class Carousel {
         this.root.appendChild(nextButton);
         this.root.appendChild(prevButton);
 
-        nextButton.addEventListener('click', this.next.bind(this));
+
         prevButton.addEventListener('click', this.prev.bind(this));
+        nextButton.addEventListener('click', this.next.bind(this));
+        
 
         if (this.options.loop === true) {
 
@@ -115,11 +117,11 @@ class Carousel {
 
             if (index === 0) {
 
-                prevButton.classList.add('carousel__prev--hidden');
+                prevButton.classList.add('carousel__prev--hidden')
 
             } else {
 
-                prevButton.classList.remove('carousel__prev--hidden');
+                prevButton.classList.remove('carousel__prev--hidden')
 
             };
 
@@ -127,15 +129,16 @@ class Carousel {
 
             if (this.items[this.currentItem + this.slidesVisible] === undefined) {
 
-                nextButton.classList.add('carousel__next--hidden');
+                nextButton.classList.add('carousel__next--hidden')
 
             } else {
 
-                nextButton.classList.remove('carousel_next--hidden');
+                nextButton.classList.remove('carousel_next--hidden')
 
             };
 
         });
+
 
     };
 
@@ -164,11 +167,27 @@ class Carousel {
 
         if (index < 0) {
 
-            index = this.items.length - this.options.slidesVisible;
+            if (this.options.loop) {
 
-        } else if (index >= this.items.length || (this.items[this.currentItem + this.options.slidesVisible] === undefined && index > this.currentItem)) {
+                index = this.items.length - this.options.slidesVisible;
 
-            index = 0;
+            } else {
+
+                return
+
+            };
+
+        } else if (index >= this.items.length || (this.items[this.currentItem + this.slidesVisible] === undefined && index > this.currentItem)) {
+
+            if (this.options.loop) {
+
+                index = 0; 
+
+            } else {
+
+                return
+
+            };
 
         };
 
@@ -190,7 +209,7 @@ class Carousel {
 
     onWindowResize () {
 
-        let mobile = window.innerWidth < 800;
+        let mobile = window.innerWidth < 1200;
 
         if (mobile != this.isMobile) {
 
@@ -240,8 +259,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     new Carousel(document.querySelector('#carousel1'), {
 
-        slidesVisible: 1,
-        slidesToScroll: 1,
+        slidesVisible: 3,
+        slidesToScroll: 3,
         loop : false
 
     });
@@ -257,8 +276,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     new Carousel(document.querySelector('#carousel3'), {
 
-        slidesVisible: 3,
-        slidesToScroll: 3,
+        slidesVisible: 1,
+        slidesToScroll: 1,
 
     });
 
