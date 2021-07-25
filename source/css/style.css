@@ -86,9 +86,10 @@ main {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  opacity: 0.7;
+  opacity: 0.9;
   cursor: pointer;
   transition: 0.3s;
+  animation: opacity 0.3s;
 }
 .carousel__prev:hover,
 .carousel__next:hover {
@@ -105,6 +106,16 @@ main {
 
 .carousel__next {
   background: #FFF url(../image/right.png) center/cover no-repeat;
+}
+
+.carousel__prev--hidden, .carousel__next--hidden {
+  opacity: 0.2;
+  cursor: auto;
+}
+.carousel__prev--hidden:hover, .carousel__next--hidden:hover {
+  transition: 0.5s;
+  transform: none;
+  opacity: 0.2;
 }
 
 /*# sourceMappingURL=style.css.map */

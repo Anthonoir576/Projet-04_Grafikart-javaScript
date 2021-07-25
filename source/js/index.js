@@ -17,7 +17,8 @@ class Carousel {
         this.options = Object.assign({}, {
 
             slidesToScroll: 1,
-            slidesVisible: 1
+            slidesVisible: 1,
+            loop : false
 
         }, options)
 
@@ -31,6 +32,7 @@ class Carousel {
         
         this.root.appendChild(this.container);
         this.element.appendChild(this.root);
+        this.moveCallBacks = [];
 
         this.items = children.map( (child) => {
             
@@ -71,6 +73,32 @@ class Carousel {
         nextButton.addEventListener('click', this.next.bind(this));
         prevButton.addEventListener('click', this.prev.bind(this));
 
+        this.onMove(index => {
+
+            if (index === 0) {
+
+                prevButton.classList.add('carousel__prev--hidden');
+
+            } else {
+
+                prevButton.classList.remove('carousel__prev--hidden');
+
+            };
+
+            // ##################################################################
+
+            if (this.items[this.currentItem + this.options.slidesVisible] === undefined) {
+
+                nextButton.classList.add('carousel__next--hidden');
+
+            } else {
+
+                nextButton.classList.remove('carousel_next--hidden');
+
+            };
+
+        });
+
     };
 
     next () {
@@ -104,9 +132,16 @@ class Carousel {
         let translateX = index * -100 / this.items.length;
         this.container.style.transform = 'translate3d(' + translateX + '%, 0, 0)';
         this.currentItem = index;
+        this.moveCallBacks.forEach(cb => {cb(index)});
 
     };
 
+
+    onMove(cb) {
+
+        this.moveCallBacks.push(cb);
+
+    };
 
     /**
      * 
@@ -131,8 +166,8 @@ document.addEventListener('DOMContentLoaded', () => {
     new Carousel(document.querySelector('#carousel1'), {
 
         slidesVisible: 1,
-        slidesToScroll: 1
-        
+        slidesToScroll: 1,
+        loop : false
 
     })
 
