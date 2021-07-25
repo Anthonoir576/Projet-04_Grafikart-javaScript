@@ -24,6 +24,7 @@ class Carousel {
         
         // permet de recupere les elements enfants item a ce moment du script sinon le carousel, et caoursel__container aurait etait considéré comme element enfant
         let children = [].slice.call(element.children);
+        this.currentItem = 0;
         this.root = this.createDivWithClass('carousel');
 
         this.container = this.createDivWithClass('carousel__container');
@@ -69,6 +70,28 @@ class Carousel {
 
         nextButton.addEventListener('click', this.next.bind(this));
         prevButton.addEventListener('click', this.prev.bind(this));
+
+    };
+
+    next () {
+
+        this.goToItem(this.currentItem + this.options.slidesToScroll)
+
+    };
+
+    prev () {
+
+        this.goToItem(this.currentItem - this.options.slidesToScroll)
+
+    };
+
+    /**
+     * Deplace le carousel vers lelement ciblé
+     * @param {} index 
+     */
+    goToItem (index) {
+
+
 
     };
 
