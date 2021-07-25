@@ -21,11 +21,13 @@ body:hover {
 main {
   text-align: center;
   width: 100%;
+  padding: 50px;
 }
 
 .item {
   width: 60%;
   max-width: 900px;
+  min-width: 100px;
   margin: 0px auto;
   border: 2px solid rgba(0, 0, 0, 0.89);
   border-radius: 9px;
@@ -43,6 +45,8 @@ main {
 }
 .item img {
   width: 100%;
+  height: auto;
+  min-height: 141px;
   margin: 20px 0 0 0;
   border-top: 2px solid rgba(0, 0, 0, 0.801);
   border-bottom: 2px solid rgba(0, 0, 0, 0.801);
@@ -61,10 +65,11 @@ main {
 
 .carousel {
   position: relative;
+  overflow: hidden;
 }
 
-.carousel__item {
-  float: left;
+.carousel__container {
+  display: flex;
 }
 
 /*# sourceMappingURL=style.css.map */

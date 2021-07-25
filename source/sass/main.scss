@@ -33,6 +33,7 @@ main {
 
     text-align: center;
     width: 100%;
+    padding: 50px;
 
 }
 
@@ -40,6 +41,7 @@ main {
 
     width: 60%;
     max-width: 900px;
+    min-width: 100px;
     margin: 0px auto;
 
     border: 2px solid rgba(0, 0, 0, 0.89);
@@ -68,6 +70,8 @@ main {
     & img {
 
         width: 100%;
+        height: auto;
+        min-height: 141px;
         margin: 20px 0 0 0;
 
         border-top: 2px solid rgba(0, 0, 0, 0.801);
@@ -106,11 +110,12 @@ main {
 .carousel {
 
     position: relative;
+    overflow: hidden;
 
 }
 
-.carousel__item {
+.carousel__container {
 
-    float: left;
+    display: flex;
 
 }
