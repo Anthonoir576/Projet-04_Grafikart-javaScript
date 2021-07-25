@@ -91,7 +91,9 @@ class Carousel {
      */
     goToItem (index) {
 
-
+        let translateX = index * -100 / this.items.length;
+        this.container.style.transform = 'translate3d(' + translateX + '%, 0, 0)';
+        this.currentItem = index;
 
     };
 
