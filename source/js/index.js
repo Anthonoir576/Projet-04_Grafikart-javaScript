@@ -22,9 +22,10 @@ class Carousel {
 
         }, options)
 
-        
         // permet de recupere les elements enfants item a ce moment du script sinon le carousel, et caoursel__container aurait etait considéré comme element enfant
         let children = [].slice.call(element.children);
+
+        this.isMobile = false;
         this.currentItem = 0;
         this.root = this.createDivWithClass('carousel');
 
@@ -47,8 +48,17 @@ class Carousel {
 
         this.setStyle();
         this.createNavigation();
+        this.moveCallBacks.forEach(cb => cb(0));
+
+        this.onWindowResize();
+
+        window.addEventListener('resize', this.onWindowResize.bind(this));
 
     };
+
+
+
+
 
     /**
      * 
@@ -56,11 +66,15 @@ class Carousel {
      */
     setStyle () {
 
-        let ratio = this.items.length / this.options.slidesVisible;
+        let ratio = this.items.length / this.slidesVisible;
         this.container.style.width = (ratio * 100) + "%";
-        this.items.forEach(item => {item.style.width = ((100 / this.options.slidesVisible) / ratio) + "%"});
+        this.items.forEach(item => {item.style.width = ((100 / this.slidesVisible) / ratio) + "%"});
 
     };
+
+
+
+
 
     createNavigation () {
 
@@ -72,6 +86,12 @@ class Carousel {
 
         nextButton.addEventListener('click', this.next.bind(this));
         prevButton.addEventListener('click', this.prev.bind(this));
+
+        if (this.options.loop === true) {
+
+            return
+
+        };
 
         this.onMove(index => {
 
@@ -87,7 +107,7 @@ class Carousel {
 
             // ##################################################################
 
-            if (this.items[this.currentItem + this.options.slidesVisible] === undefined) {
+            if (this.items[this.currentItem + this.slidesVisible] === undefined) {
 
                 nextButton.classList.add('carousel__next--hidden');
 
@@ -101,21 +121,26 @@ class Carousel {
 
     };
 
+
+
     next () {
 
-        this.goToItem(this.currentItem + this.options.slidesToScroll)
+        this.goToItem(this.currentItem + this.slidesToScroll)
 
     };
+
 
     prev () {
 
-        this.goToItem(this.currentItem - this.options.slidesToScroll)
+        this.goToItem(this.currentItem - this.slidesToScroll)
 
     };
 
+
+
     /**
      * Deplace le carousel vers lelement ciblé
-     * @param {} index 
+     *
      */
     goToItem (index) {
 
@@ -123,7 +148,7 @@ class Carousel {
 
             index = this.items.length - this.options.slidesVisible;
 
-        } else if (index >= this.items.length || this.items[this.currentItem + this.options.slidesVisible] === undefined) {
+        } else if (index >= this.items.length || (this.items[this.currentItem + this.options.slidesVisible] === undefined && index > this.currentItem)) {
 
             index = 0;
 
@@ -137,11 +162,28 @@ class Carousel {
     };
 
 
+
+
     onMove(cb) {
 
         this.moveCallBacks.push(cb);
 
     };
+
+    onWindowResize () {
+
+        let mobile = window.innerWidth < 800;
+
+        if (mobile != this.isMobile) {
+
+            this.isMobile = mobile;
+            this.setStyle();
+                    
+            this.moveCallBacks.forEach(cb => cb(this.currentItem));
+        };
+
+    };
+
 
     /**
      * 
@@ -155,6 +197,21 @@ class Carousel {
         return div
 
     };
+
+
+
+    get slidesToScroll () {
+
+        return this.isMobile ? 1 : this.options.slidesToScroll
+
+    };
+
+    get slidesVisible () {
+
+        return this.isMobile ? 1 : this.options.slidesVisible
+
+    };
+
 
 };
 
@@ -171,11 +228,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     })
 
+
     new Carousel(document.querySelector('#carousel2'), {
 
         slidesVisible: 2,
-        slidesToScroll: 2
-        
+        slidesToScroll: 2,
+        loop : false
 
     })
 
@@ -183,11 +241,9 @@ document.addEventListener('DOMContentLoaded', () => {
     new Carousel(document.querySelector('#carousel3'), {
 
         slidesVisible: 3,
-        slidesToScroll: 3
-        
+        slidesToScroll: 3,
+        loop : false
 
     })
-
-
 
 });
